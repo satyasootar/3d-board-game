@@ -77,10 +77,9 @@ export function Symbol({ type, position }: SymbolProps) {
   return (
     <group position={position}>
       <motion.mesh
-        initial={{ scale: 0, rotateX: Math.PI }}
-        animate={{ scale: 1, rotateX: 0 }}
+        initial={{ scale: 0, rotateX: Math.PI * 1.5 }}
+        animate={{ scale: 1, rotateX: Math.PI / 2 }}
         transition={{ type: 'spring', bounce: 0.5 }}
-        rotation={[Math.PI / 2, 0, 0]}
       >
         <torusGeometry args={[0.6, 0.15, 16, 32]} />
         {renderMaterial()}
