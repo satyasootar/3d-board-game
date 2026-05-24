@@ -8,7 +8,7 @@ interface BoardProps {
 
 export function Board({}: BoardProps) {
   const activeTheme = useThemeStore((state) => state.activeTheme);
-  const { shape, material, color, opacity, glowIntensity, gridColor } = activeTheme.board;
+  const { shape, material, color, opacity, glowIntensity } = activeTheme.board;
 
   const gridSize = 3;
   const cellSize = 2.2;
@@ -119,7 +119,7 @@ export function Board({}: BoardProps) {
           whileHover={isInteractive ? { y: 0.1, scale: 1.05 } : {}}
           whileTap={isInteractive ? { y: -0.1, scale: 0.95 } : {}}
           transition={{ duration: 0.5, delay: i * 0.05, type: 'spring' }}
-          onClick={(e) => { 
+          onClick={(e: any) => { 
             if (isInteractive) {
               e.stopPropagation(); 
               makeMove(i); 

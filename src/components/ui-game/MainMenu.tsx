@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+const MotionDiv = motion.div as any;
+const MotionButton = motion.button as any;
 import { useGameStore } from '../../store/useGameStore';
 import type { OpponentType } from '../../store/useGameStore';
 import { Users, Brain, Zap, Flame, ShieldAlert } from 'lucide-react';
@@ -19,14 +21,14 @@ export function MainMenu() {
 
   return (
     <div className="absolute inset-y-0 left-0 w-96 z-40 flex flex-col justify-center p-12 pointer-events-none">
-      <motion.div 
+      <MotionDiv 
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="pointer-events-auto"
       >
         <div className="mb-12">
-          <motion.div 
+          <MotionDiv 
             initial={{ width: 0 }}
             animate={{ width: 40 }}
             className="h-1 bg-cyan-400 mb-4"
@@ -41,7 +43,7 @@ export function MainMenu() {
 
         <div className="space-y-1">
           {modes.map((mode, index) => (
-            <motion.button
+            <MotionButton
               key={mode.id}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -59,10 +61,10 @@ export function MainMenu() {
                 </span>
               </div>
               <mode.icon className={cn("w-5 h-5 opacity-0 -translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0", mode.color)} />
-            </motion.button>
+            </MotionButton>
           ))}
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   );
 }

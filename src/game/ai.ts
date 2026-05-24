@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import type { Player, OpponentType } from '../store/useGameStore';
+import type { Player } from '../store/useGameStore';
 import { useThemeStore } from '../store/useThemeStore';
 import { themes } from '../config/themes';
 

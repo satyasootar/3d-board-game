@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+const MotionDiv = motion.div as any;
 import { useGameStore } from '../../store/useGameStore';
 import { Button } from '@/components/ui/button';
 
@@ -11,7 +12,7 @@ export function GameHUD() {
     <>
       {/* Top HUD */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
-        <motion.div 
+        <MotionDiv 
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="flex items-center gap-6"
@@ -40,19 +41,19 @@ export function GameHUD() {
               </div>
             </div>
           )}
-        </motion.div>
+        </MotionDiv>
       </div>
 
       {/* Game Over Screen */}
       <AnimatePresence>
         {status === 'game_over' && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-md"
           >
-            <motion.div 
+            <MotionDiv 
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               className="flex flex-col items-center"
@@ -80,8 +81,8 @@ export function GameHUD() {
                   Menu
                 </Button>
               </div>
-            </motion.div>
-          </motion.div>
+            </MotionDiv>
+          </MotionDiv>
         )}
       </AnimatePresence>
 

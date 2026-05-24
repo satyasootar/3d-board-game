@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+const MotionDiv = motion.div as any;
+const MotionButton = motion.button as any;
 import { useThemeStore } from '../../store/useThemeStore';
 import { themes } from '../../config/themes';
 import { Palette, Sun, Zap, Save, ChevronLeft, LayoutTemplate } from 'lucide-react';
@@ -15,19 +17,19 @@ export function CustomizationPanel() {
   return (
     <>
       {/* Toggle Button */}
-      <motion.button
+      <MotionButton
         className="absolute right-0 top-1/2 -translate-y-1/2 z-50 p-3 bg-black/80 backdrop-blur-md border-y border-l border-white/5 rounded-l-xl text-white/50 hover:text-cyan-400 hover:bg-black transition-colors"
         whileHover={{ x: -2 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
       >
         <ChevronLeft className={cn("w-5 h-5 transition-transform", isOpen ? "rotate-180" : "rotate-0")} />
-      </motion.button>
+      </MotionButton>
 
       {/* Main Panel */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ x: '100%', opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: '100%', opacity: 0 }}
@@ -59,7 +61,7 @@ export function CustomizationPanel() {
                   <tab.icon className="w-5 h-5" />
                   <span className="text-[9px] uppercase font-bold tracking-widest">{tab.label}</span>
                   {activeTab === tab.id && (
-                    <motion.div layoutId="activeTabIndicator" className="absolute -bottom-[1px] left-0 right-0 h-0.5 bg-cyan-400" />
+                    <MotionDiv layoutId="activeTabIndicator" className="absolute -bottom-[1px] left-0 right-0 h-0.5 bg-cyan-400" />
                   )}
                 </button>
               ))}
@@ -73,7 +75,7 @@ export function CustomizationPanel() {
                     const isUnlocked = unlockedThemes.includes(theme.id);
                     const isActive = activeThemeId === theme.id;
                     return (
-                      <motion.div
+                      <MotionDiv
                         key={theme.id}
                         whileHover={isUnlocked && !isActive ? { x: 5 } : {}}
                         whileTap={isUnlocked ? { scale: 0.98 } : {}}
@@ -94,7 +96,7 @@ export function CustomizationPanel() {
                           </div>
                           {!isUnlocked && <LockIcon className="w-4 h-4 text-white/30" />}
                         </div>
-                      </motion.div>
+                      </MotionDiv>
                     );
                   })}
                 </div>
@@ -223,7 +225,7 @@ export function CustomizationPanel() {
                 <Save className="w-4 h-4" /> Save Preset
               </Button>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </>
@@ -261,7 +263,7 @@ const ToggleControl = ({ label, checked, onChange }: any) => (
         checked ? "bg-white border-white" : "bg-transparent border-white/20"
       )}
     >
-      <motion.div
+      <MotionDiv
         className={cn("w-4 h-4", checked ? "bg-black" : "bg-white/50")}
         animate={{ x: checked ? 24 : 0 }}
         transition={{ type: "spring", stiffness: 500, damping: 30 }}

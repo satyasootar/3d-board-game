@@ -85,7 +85,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     }
   },
 
-  resetGame: () => set((state) => ({
+  resetGame: () => set(() => ({
     board: Array(9).fill(null),
     currentPlayer: 'X',
     status: 'playing',

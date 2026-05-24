@@ -55,26 +55,26 @@ export function ArenaCanvas() {
           maxDistance={20}
         />
 
-        <EffectComposer disableNormalPass multisampling={0}>
-          {effects.bloom && (
+        <EffectComposer enableNormalPass={false} multisampling={0}>
+          {(effects.bloom && (
             <Bloom 
               luminanceThreshold={0.2} 
               luminanceSmoothing={0.9} 
               intensity={effects.bloomIntensity} 
               mipmapBlur // uses a faster blurring method
             />
-          )}
-          {effects.glitch && (
+          )) as any}
+          {(effects.glitch && (
             <Glitch
               delay={[1.5, 3.5] as any}
               duration={[0.1, 0.3] as any}
               strength={[0.01 * effects.glitchIntensity, 0.05 * effects.glitchIntensity] as any}
               mode={GlitchMode.SPORADIC}
             />
-          )}
-          {effects.noise && (
+          )) as any}
+          {(effects.noise && (
             <Noise opacity={0.05} />
-          )}
+          )) as any}
         </EffectComposer>
       </Canvas>
     </div>
