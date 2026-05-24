@@ -1,7 +1,8 @@
 {
-  "name": "tictactoe",
+  "name": "arena-override",
+  "description": "A next-generation, fully interactive 3D Tic-Tac-Toe experience.",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
