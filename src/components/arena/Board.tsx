@@ -91,7 +91,9 @@ export function Board({}: BoardProps) {
     }
   };
 
-  const { makeMove } = useGameStore();
+  const { makeMove, status } = useGameStore();
+
+  const isInteractive = status === 'playing' || status === 'menu';
 
   return (
     <group position={[0, 0, 0]}>
@@ -114,11 +116,18 @@ export function Board({}: BoardProps) {
           position={[c.px, 0, c.pz]}
           initial={{ y: -5, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          whileHover={{ y: 0.1, scale: 1.05 }}
-          whileTap={{ y: -0.1, scale: 0.95 }}
+          whileHover={isInteractive ? { y: 0.1, scale: 1.05 } : {}}
+          whileTap={isInteractive ? { y: -0.1, scale: 0.95 } : {}}
           transition={{ duration: 0.5, delay: i * 0.05, type: 'spring' }}
-          onClick={(e) => { e.stopPropagation(); makeMove(i); }}
-          onPointerOver={() => document.body.style.cursor = 'pointer'}
+          onClick={(e) => { 
+            if (isInteractive) {
+              e.stopPropagation(); 
+              makeMove(i); 
+            }
+          }}
+          onPointerOver={() => {
+            if (isInteractive) document.body.style.cursor = 'pointer';
+          }}
           onPointerOut={() => document.body.style.cursor = 'auto'}
         >
           {getGeometry()}

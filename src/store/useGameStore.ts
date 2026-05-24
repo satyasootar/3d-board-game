@@ -56,19 +56,26 @@ export const useGameStore = create<GameState>((set, get) => ({
   makeMove: (index) => {
     const { board, currentPlayer, status } = get();
     
-    if (status !== 'playing' || board[index] !== null) return;
+    // Allow moves in playing OR menu states
+    if ((status !== 'playing' && status !== 'menu') || board[index] !== null) return;
     
     const newBoard = [...board];
     newBoard[index] = currentPlayer;
     
     const { winner, line } = checkWinner(newBoard);
     
-    if (winner) {
+    if (winner && status === 'playing') {
       set({ 
         board: newBoard, 
         status: 'game_over', 
         winner, 
         winningLine: line 
+      });
+    } else if (winner && status === 'menu') {
+      // Sandbox mode: if someone wins or draws while previewing, just clear the board
+      set({ 
+        board: Array(9).fill(null), 
+        currentPlayer: 'X' 
       });
     } else {
       set({ 
